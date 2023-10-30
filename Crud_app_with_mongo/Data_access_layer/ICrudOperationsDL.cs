@@ -14,5 +14,8 @@ namespace Crud_app_with_mongo.Data_access_layer
         public Task<UpdateRecordbyIdResponse> UpdateRecordById(InsertRecordRequest request);
 
         public Task<UpdateSalaryByIdResponse> UpdateSalaryById(UpdateSalaryByIdRequest request);
+
+        public Task<DeleteRecordByIdResponse> DeleteRecordById(DeleteRecordByIdRequest request);
+        public Task<DeleteAllRecordResponse> DeleteAllRecord();
     }
 }

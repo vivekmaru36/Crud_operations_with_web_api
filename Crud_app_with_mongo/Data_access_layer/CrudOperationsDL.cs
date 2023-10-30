@@ -1,4 +1,5 @@
-﻿using Crud_app_with_mongo.Model;
+﻿using Amazon.Runtime.Internal;
+using Crud_app_with_mongo.Model;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
@@ -174,6 +175,51 @@ namespace Crud_app_with_mongo.Data_access_layer
             {
                 response.IsSuccess = false;
                 response.Messages = "Error occured in updating salary only by id : " + ex.Message;
+            }
+            return response;
+        }
+
+        // delteting record by using id
+        public async Task<DeleteRecordByIdResponse> DeleteRecordById(DeleteRecordByIdRequest request)
+        {
+            DeleteRecordByIdResponse response = new DeleteRecordByIdResponse();
+            response.IsSuccess = true;
+            response.Message = "Record deleted succesfully by using Id ";
+            try
+            {
+                
+                var Result = await _monngoCollection.DeleteOneAsync(x => x.Id == request.ID);
+                if (!Result.IsAcknowledged)
+                {
+                    response.Message = "Document not found / record not found , Please enter a valid ID ";
+                }
+
+            }catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Message = "Error occured in deleting records using Id : " + ex.Message;
+            }
+            return response;
+        }
+
+        public async Task<DeleteAllRecordResponse> DeleteAllRecord()
+        {
+            DeleteAllRecordResponse response = new DeleteAllRecordResponse();
+            response.IsSuccess = true;
+            response.Message = "All Records deleted succesfully";
+            try
+            {
+                var Result = await _monngoCollection.DeleteManyAsync(x=>true);
+                if (!Result.IsAcknowledged)
+                {
+                    response.Message = "NO records found to delete ";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Message = "Error occured in deleting all records: " + ex.Message;
             }
             return response;
         }

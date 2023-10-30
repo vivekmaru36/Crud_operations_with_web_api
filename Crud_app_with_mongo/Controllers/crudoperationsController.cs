@@ -112,5 +112,37 @@ namespace Crud_app_with_mongo.Controllers
             return Ok(response);
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> DeleteRecordById(DeleteRecordByIdRequest request)
+        {
+            DeleteRecordByIdResponse response = new DeleteRecordByIdResponse();
+            try
+            {
+                response = await _crudOperationsDL.DeleteRecordById(request);
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Message = "Exception Occurs for put id : " + ex.Message;
+            }
+            return Ok(response);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteAllRecord()
+        {
+            DeleteAllRecordResponse response = new DeleteAllRecordResponse();
+            try
+            {
+                response = await _crudOperationsDL.DeleteAllRecord();
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Message = "Exception Occurs for deleting all records : " + ex.Message;
+            }
+            return Ok(response);
+        }
+
     }
 }
