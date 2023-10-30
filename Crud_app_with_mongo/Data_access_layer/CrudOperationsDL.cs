@@ -50,5 +50,74 @@ namespace Crud_app_with_mongo.Data_access_layer
             return response;
 
         }
+        public async Task<GetAllRecordRepsonse> GetAllRecord()
+        {
+
+            GetAllRecordRepsonse response = new GetAllRecordRepsonse();
+            response.IsSuccess= true;
+            response.Message = "Data Fetch succesfully";
+
+            try {
+
+                response.data = new List<InsertRecordRequest>();
+                response.data = await _monngoCollection.Find(x => true).ToListAsync();
+                if (response.data.Count==0)
+                {
+                    response.Message = "No records found for get";
+                }
+            }
+            catch (Exception ex) { 
+                response.IsSuccess = false;
+                response.Message = "Exception Occurs on get : " + ex.Message;
+            }
+            return response;
+        }
+
+        public async Task<GetRecordByIDResponse> GetRecordByID(string ID)
+        {
+            GetRecordByIDResponse response = new GetRecordByIDResponse();
+            response.IsSuccess = true;
+            response.Message = "Fetched data successfully by ID";
+
+            try {
+                response.data=await _monngoCollection.Find(x=>(x.Id==ID)).FirstOrDefaultAsync();
+                if (response.data == null)
+                {
+                    response.Message = "Invalid Id Please enter valid Id";
+                }
+            }
+            catch(Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Message= "Exception occurs for get by ID : "+ex.Message;
+            }
+            return response;
+        }
+
+        public async Task<GetRecordByNameResponse> GetRecordByName(string Name)
+        {
+            GetRecordByNameResponse response = new GetRecordByNameResponse();
+            response.IsSuccess = true;
+            response.Message = "Fetched data successfully by Name";
+
+            try
+            {
+                // since it is list so allocate data first
+                response.data=new List<InsertRecordRequest>();
+
+                response.data = await _monngoCollection.Find(x => (x.FirstName == Name)||(x.LastName==Name)).ToListAsync();
+                if (response.data.Count == 0)
+                {
+                    response.Message = "Invalid Name Please enter valid Name ";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Message = "Exception occurs for get by Name : " + ex.Message;
+            }
+            return response;
+        }
     }
+
 }
