@@ -1,4 +1,5 @@
 ﻿using Crud_app_with_mongo.Model;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
@@ -115,6 +116,64 @@ namespace Crud_app_with_mongo.Data_access_layer
             {
                 response.IsSuccess = false;
                 response.Message = "Exception occurs for get by Name : " + ex.Message;
+            }
+            return response;
+        }
+
+        // update using id
+        public async Task<UpdateRecordbyIdResponse> UpdateRecordById(InsertRecordRequest request)
+        {
+            UpdateRecordbyIdResponse response = new UpdateRecordbyIdResponse();
+            response.IsSuccess = true;
+            response.Message = "Updated records successfully by id";
+            try {
+
+                // to get created id from db using getrecordbyid
+                GetRecordByIDResponse response1 = await GetRecordByID(request.Id);
+                request.CreatedDate = response1.data.CreatedDate;
+
+                // to update the current id
+                request.UpdatedDate=DateTime.Now.ToString();
+
+                var Result = await _monngoCollection.ReplaceOneAsync(x => x.Id == request.Id, request);
+
+                if (!Result.IsAcknowledged) {
+                    response.Message = "Erorr in updating records since id not found ";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Message = "Error occured in updating records by id : " + ex.Message;
+            }
+
+            return response;
+        }
+
+        // updating just salary by using patch
+        public async Task<UpdateSalaryByIdResponse> UpdateSalaryById(UpdateSalaryByIdRequest request)
+        {
+            UpdateSalaryByIdResponse response = new UpdateSalaryByIdResponse();
+            response.IsSuccess = true;
+            response.Messages = "Updated records successfully by id";
+            try
+            {
+                var Filter = new BsonDocument().Add("Salary", request.Salary).Add("UpdatedDate", DateTime.Now.ToString());
+
+                // query to patch
+                var UpdatedDate = new BsonDocument("$set", Filter);
+
+                var Result = await _monngoCollection.UpdateOneAsync(x => x.Id == request.Id, UpdatedDate);
+
+                if (!Result.IsAcknowledged)
+                {
+                    response.Messages = "Erorr in updating salary only , since id not found ";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Messages = "Error occured in updating salary only by id : " + ex.Message;
             }
             return response;
         }

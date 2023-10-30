@@ -78,5 +78,39 @@ namespace Crud_app_with_mongo.Controllers
             }
             return Ok(response);
         }
+
+        // update records using id
+        [HttpPut]
+        public async Task<IActionResult> UpdateRecordById(InsertRecordRequest request)
+        {
+            UpdateRecordbyIdResponse response = new UpdateRecordbyIdResponse();
+            try
+            {
+                response = await _crudOperationsDL.UpdateRecordById(request);
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Message = "Exception Occurs for put id : " + ex.Message;
+            }
+            return Ok(response);
+        }
+
+        [HttpPatch]
+        public async Task<IActionResult> UpdateSalaryById(UpdateSalaryByIdRequest request)
+        {
+            UpdateSalaryByIdResponse response = new UpdateSalaryByIdResponse();
+            try
+            {
+                response = await _crudOperationsDL.UpdateSalaryById(request);
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Messages = "Exception Occurs for put id : " + ex.Message;
+            }
+            return Ok(response);
+        }
+
     }
 }
