@@ -144,5 +144,25 @@ namespace Crud_app_with_mongo.Controllers
             return Ok(response);
         }
 
+        // all apis for rfid implementations
+        
+        // Api for Regstrestion page
+        [HttpPost]
+        public async Task<IActionResult> Regestration_Details(Regestration_Details_Request request)
+        {
+            Regestration_Details_Response response =new Regestration_Details_Response();
+            try
+            {
+                response = await _crudOperationsDL.RegestrationDetails(request); 
+            }
+            catch(Exception ex){
+
+                response.isSuccess = false;
+                response.Message = "Reg Error occured : " + ex.Message;
+
+            }
+            return Ok(response);
+        }
+
     }
 }

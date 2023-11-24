@@ -43,3 +43,9 @@ C:\Users\vivek\Desktop\crud_app_with_mongo\Crud_app_with_mongo\Crud_app_with_mon
 C:\Users\vivek\Desktop\crud_app_with_mongo\Crud_app_with_mongo\Crud_app_with_mongo\bin\Debug\net6.0\runtimes\linux\native\libmongocrypt.so
 C:\Users\vivek\Desktop\crud_app_with_mongo\Crud_app_with_mongo\Crud_app_with_mongo\bin\Debug\net6.0\runtimes\osx\native\libmongocrypt.dylib
 C:\Users\vivek\Desktop\crud_app_with_mongo\Crud_app_with_mongo\Crud_app_with_mongo\bin\Debug\net6.0\runtimes\win\native\mongocrypt.dll
+C:\Users\vivek\Desktop\crud_app_with_mongo\Crud_app_with_mongo\Crud_app_with_mongo\bin\Debug\net6.0\System.Web.Cors.dll
+C:\Users\vivek\Desktop\crud_app_with_mongo\Crud_app_with_mongo\Crud_app_with_mongo\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+C:\Users\vivek\Desktop\crud_app_with_mongo\Crud_app_with_mongo\Crud_app_with_mongo\bin\Debug\net6.0\System.Web.Http.dll
+C:\Users\vivek\Desktop\crud_app_with_mongo\Crud_app_with_mongo\Crud_app_with_mongo\bin\Debug\net6.0\System.Web.Http.Cors.dll
+C:\Users\vivek\Desktop\crud_app_with_mongo\Crud_app_with_mongo\Crud_app_with_mongo\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\vivek\Desktop\crud_app_with_mongo\Crud_app_with_mongo\Crud_app_with_mongo\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

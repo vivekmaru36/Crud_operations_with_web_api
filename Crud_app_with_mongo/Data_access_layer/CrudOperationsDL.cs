@@ -9,10 +9,16 @@ namespace Crud_app_with_mongo.Data_access_layer
     public class CrudOperationsDL : ICrudOperationsDL
     {
         private readonly IConfiguration _configuration;
+     
         // for mongo client
         private readonly MongoClient _mongoClient;
 
         private readonly IMongoCollection<InsertRecordRequest> _monngoCollection;
+
+        // For Rfid Mongo
+
+        // For Regform
+        private readonly IMongoCollection<Regestration_Details_Request> _monngoCollection_1;
 
         public CrudOperationsDL(IConfiguration configuration) { 
             _configuration = configuration;
@@ -21,8 +27,18 @@ namespace Crud_app_with_mongo.Data_access_layer
             // providing the database name and collection name
             var _MongoDatabase = _mongoClient.GetDatabase(_configuration["Databasesettings:DatabaseName"]);
 
+
             // instance for collections
             _monngoCollection = _MongoDatabase.GetCollection<InsertRecordRequest>(_configuration["Databasesettings:CollectionName"]);
+
+
+            // Connection Settings For Rfid
+
+            // Reg form
+            // providing the database name and collection name for reg form
+            var _MongoDatabase_1 = _mongoClient.GetDatabase(_configuration["Databasesettings:DatabaseName_1"]);
+
+            _monngoCollection_1 = _MongoDatabase_1.GetCollection<Regestration_Details_Request>(_configuration["Databasesettings:CollectionName_1"]);
 
         }
 
@@ -221,6 +237,32 @@ namespace Crud_app_with_mongo.Data_access_layer
                 response.IsSuccess = false;
                 response.Message = "Error occured in deleting all records: " + ex.Message;
             }
+            return response;
+        }
+
+        // for rfid
+        // dont' forget to add async
+
+        // my apis extended definations of implementations in ICrudOperationsDl.cs
+
+        public async Task<Regestration_Details_Response> RegestrationDetails(Regestration_Details_Request request)
+        {
+            Regestration_Details_Response response = new Regestration_Details_Response();
+            // default value as True
+            response.isSuccess = true;
+            response.Message = "Regform -> Data inserted succesfully";
+            try
+            {
+                request.CreatedDate = DateTime.Now.ToString();
+                request.UpdatedDate = string.Empty;
+
+                await _monngoCollection_1.InsertOneAsync(request);
+
+            }catch(Exception ex) {
+                response.isSuccess = false;
+                response.Message = "Reg_Dl Exception Occurs : " + ex.Message;
+            }
+
             return response;
         }
     }

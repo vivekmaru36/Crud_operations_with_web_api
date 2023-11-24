@@ -6,16 +6,14 @@ namespace Crud_app_with_mongo.Data_access_layer
     {
         public Task<InsertRecordResponse> InsertRecord(InsertRecordRequest request);
         public Task<GetAllRecordRepsonse> GetAllRecord();
-
         public Task<GetRecordByIDResponse> GetRecordByID(string ID);
-
         public Task<GetRecordByNameResponse> GetRecordByName(string Name);
-
         public Task<UpdateRecordbyIdResponse> UpdateRecordById(InsertRecordRequest request);
-
         public Task<UpdateSalaryByIdResponse> UpdateSalaryById(UpdateSalaryByIdRequest request);
-
         public Task<DeleteRecordByIdResponse> DeleteRecordById(DeleteRecordByIdRequest request);
         public Task<DeleteAllRecordResponse> DeleteAllRecord();
+
+        // my apis
+        public Task<Regestration_Details_Response> RegestrationDetails(Regestration_Details_Request request);
     }
 }
