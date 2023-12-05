@@ -20,6 +20,9 @@ namespace Crud_app_with_mongo.Data_access_layer
         // For Regform
         private readonly IMongoCollection<Regestration_Details_Request> _monngoCollection_1;
 
+        // For Login
+        private readonly IMongoCollection<LoginCheckRequest> _monngoCollection_LoginCheck;
+
         public CrudOperationsDL(IConfiguration configuration) { 
             _configuration = configuration;
             _mongoClient=new MongoClient(_configuration["Databasesettings:ConnectionString"]);
@@ -39,6 +42,8 @@ namespace Crud_app_with_mongo.Data_access_layer
             var _MongoDatabase_1 = _mongoClient.GetDatabase(_configuration["Databasesettings:DatabaseName_1"]);
 
             _monngoCollection_1 = _MongoDatabase_1.GetCollection<Regestration_Details_Request>(_configuration["Databasesettings:CollectionName_1"]);
+
+            _monngoCollection_LoginCheck = _MongoDatabase_1.GetCollection<LoginCheckRequest>(_configuration["Databasesettings:CollectionName_2"]);
 
         }
 
@@ -264,6 +269,40 @@ namespace Crud_app_with_mongo.Data_access_layer
             }
 
             return response;
+        }
+
+        public async Task<LoginCheckResponse> LoginCheck(LoginCheckRequest loginRequest)
+        {
+            LoginCheckResponse loginResponse = new LoginCheckResponse();
+            loginResponse.isSuccess = true;
+            loginResponse.Message = "Data inserted for login";
+            try
+            {
+                /*await _monngoCollection_LoginCheck.InsertOneAsync(loginRequest);*/
+
+                // query to find rfid and pass match
+                var user=await _monngoCollection_1.Find(u=>u.rfidno== loginRequest.rfid && u.password==loginRequest.password).FirstOrDefaultAsync();
+
+                if (user != null)
+                {
+                    // succesful login
+                    loginResponse.isSuccess = true;
+                    loginResponse.Message = "Login Succesful !";
+                }
+                else
+                {
+                    // invalid credentials 
+                    loginResponse.isSuccess= false;
+                    loginResponse.Message = "Invalid credentials . Login Failed";
+                }
+
+            }catch(Exception ex)
+            {
+                loginResponse.isSuccess = false;
+                loginResponse.Message = "Exception occurs : " + ex.Message;
+            }
+
+            return loginResponse;
         }
     }
 

@@ -14,6 +14,12 @@ namespace Crud_app_with_mongo.Data_access_layer
         public Task<DeleteAllRecordResponse> DeleteAllRecord();
 
         // my apis
+
+        // api for reg
         public Task<Regestration_Details_Response> RegestrationDetails(Regestration_Details_Request request);
+
+        //api for login
+        public Task<LoginCheckResponse> LoginCheck(LoginCheckRequest loginRequest);
+
     }
 }

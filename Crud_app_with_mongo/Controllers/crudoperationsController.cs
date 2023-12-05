@@ -164,5 +164,25 @@ namespace Crud_app_with_mongo.Controllers
             return Ok(response);
         }
 
+        // api to check login is valid or not
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginCheckRequest loginRequest)
+        {
+            LoginCheckResponse loginResponse = new LoginCheckResponse();
+
+            try
+            {
+                loginResponse=await _crudOperationsDL.LoginCheck(loginRequest);
+
+            }catch(Exception ex)
+            {
+                loginResponse.isSuccess=false;
+                loginResponse.Message = "Exception Occurs : " + ex.Message;
+            }
+
+            return Ok(loginResponse);
+        }
+
+
     }
 }
