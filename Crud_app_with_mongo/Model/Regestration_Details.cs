@@ -51,8 +51,6 @@ namespace Crud_app_with_mongo.Model
         public string Message { get; set; }
     }
 
-
-
     // for making rfid unique in db schema
 
     /*public class MongoDbContext
