@@ -40,12 +40,17 @@ namespace Crud_app_with_mongo.Model
         [BsonElement("rfidno")]
         public string rfidno { get; set; }
 
+        // password field
+        [Required]
+        [BsonElement("password")]
+        public string password { get; set; }    
     }
     public class Regestration_Details_Response
     {
         public bool isSuccess { get; set; }
         public string Message { get; set; }
     }
+
 
 
     // for making rfid unique in db schema
