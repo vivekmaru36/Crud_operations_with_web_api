@@ -304,6 +304,29 @@ namespace Crud_app_with_mongo.Data_access_layer
 
             return loginResponse;
         }
+
+        public async Task<GetRecordByRfidResponse> GetRecordByRfid(string rfid)
+        {
+            GetRecordByRfidResponse response = new GetRecordByRfidResponse();
+            response.IsSuccess = true;
+            response.Message = "Fetched data successfully by Rfid";
+
+            try
+            {
+                response.data = new List<Regestration_Details_Request>();
+                response.data = await _monngoCollection_1.Find(x => (x.rfidno == rfid)).ToListAsync();
+                if (response.data.Count==0)
+                {
+                    response.Message = "Invalid rfid Please enter valid rfid";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Message = "Exception occurs for get by rfid : " + ex.Message;
+            }
+            return response;
+        }
     }
 
 }

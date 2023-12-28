@@ -183,6 +183,23 @@ namespace Crud_app_with_mongo.Controllers
             return Ok(loginResponse);
         }
 
+        // API TO GET DETAILS BY NO : RFID
+        [HttpGet]
+        public async Task<IActionResult> GetRecordByRfid([FromQuery] string rfid)
+        {
+            GetRecordByRfidResponse response = new GetRecordByRfidResponse();
+            try
+            {
+                response = await _crudOperationsDL.GetRecordByRfid(rfid);
+            }
+            catch(Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Message = "Exception occurs : " + ex.Message;
+            }
+            return Ok(response);
+        }
+
 
     }
 }

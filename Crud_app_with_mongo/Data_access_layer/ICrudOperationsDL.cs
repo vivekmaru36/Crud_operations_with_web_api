@@ -21,5 +21,9 @@ namespace Crud_app_with_mongo.Data_access_layer
         //api for login
         public Task<LoginCheckResponse> LoginCheck(LoginCheckRequest loginRequest);
 
+
+        // api for fetching based on rfid
+        public Task<GetRecordByRfidResponse> GetRecordByRfid(string rfid);
+
     }
 }
