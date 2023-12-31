@@ -6,6 +6,8 @@
 2) created api for registering as teacher :
      https://github.com/vivekmaru36/Crud_operations_with_web_api/blob/master/Crud_app_with_mongo/Data_access_layer/CrudOperationsDL.cs
 
+3) updated and did lot of changes in getrecordbyrfid api and logincheckapi 
+
 # Crud_app
 Uses asp.net 6.1 and mongo db 
 

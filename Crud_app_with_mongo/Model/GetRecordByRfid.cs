@@ -6,5 +6,6 @@
         public string Message { get; set; }
 
         public List<Regestration_Details_Request> data { get; set; }
+        public List<Register_Teacher_Request> data2 { get; set; }
     }
 }

@@ -318,8 +318,9 @@ namespace Crud_app_with_mongo.Data_access_layer
 
                 // query to find rfid and pass match
                 var user = await _monngoCollection_1.Find(u => u.rfidno == loginRequest.rfid && u.password == loginRequest.password).FirstOrDefaultAsync();
+                var teacher = await _monngoCollection_3.Find(u => u.rfidno == loginRequest.rfid && u.password == loginRequest.password).FirstOrDefaultAsync();
 
-                if (user != null)
+                if (user != null || teacher != null )
                 {
                     // succesful login
                     loginResponse.isSuccess = true;
@@ -347,12 +348,18 @@ namespace Crud_app_with_mongo.Data_access_layer
             GetRecordByRfidResponse response = new GetRecordByRfidResponse();
             response.IsSuccess = true;
             response.Message = "Fetched data successfully by Rfid";
-
+            
             try
             {
                 response.data = new List<Regestration_Details_Request>();
                 response.data = await _monngoCollection_1.Find(x => (x.rfidno == rfid)).ToListAsync();
                 if (response.data.Count == 0)
+                {
+                    response.Message = "Invalid rfid Please enter valid rfid";
+                }
+                response.data2 = new List<Register_Teacher_Request>();
+                response.data2 = await _monngoCollection_3.Find(x => (x.rfidno == rfid)).ToListAsync();
+                if (response.data2.Count == 0)
                 {
                     response.Message = "Invalid rfid Please enter valid rfid";
                 }
