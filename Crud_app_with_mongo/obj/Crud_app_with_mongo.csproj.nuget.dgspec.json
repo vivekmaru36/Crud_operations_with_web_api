@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vivek\\Desktop\\crud_app_with_mongo\\Crud_app_with_mongo\\Crud_app_with_mongo\\Crud_app_with_mongo.csproj": {}
+    "C:\\Users\\vivek\\Desktop\\backend_clone\\Crud_operations_with_web_api\\Crud_app_with_mongo\\Crud_app_with_mongo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vivek\\Desktop\\crud_app_with_mongo\\Crud_app_with_mongo\\Crud_app_with_mongo\\Crud_app_with_mongo.csproj": {
+    "C:\\Users\\vivek\\Desktop\\backend_clone\\Crud_operations_with_web_api\\Crud_app_with_mongo\\Crud_app_with_mongo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vivek\\Desktop\\crud_app_with_mongo\\Crud_app_with_mongo\\Crud_app_with_mongo\\Crud_app_with_mongo.csproj",
+        "projectUniqueName": "C:\\Users\\vivek\\Desktop\\backend_clone\\Crud_operations_with_web_api\\Crud_app_with_mongo\\Crud_app_with_mongo.csproj",
         "projectName": "Crud_app_with_mongo",
-        "projectPath": "C:\\Users\\vivek\\Desktop\\crud_app_with_mongo\\Crud_app_with_mongo\\Crud_app_with_mongo\\Crud_app_with_mongo.csproj",
+        "projectPath": "C:\\Users\\vivek\\Desktop\\backend_clone\\Crud_operations_with_web_api\\Crud_app_with_mongo\\Crud_app_with_mongo.csproj",
         "packagesPath": "C:\\Users\\vivek\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vivek\\Desktop\\crud_app_with_mongo\\Crud_app_with_mongo\\Crud_app_with_mongo\\obj\\",
+        "outputPath": "C:\\Users\\vivek\\Desktop\\backend_clone\\Crud_operations_with_web_api\\Crud_app_with_mongo\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -11,7 +11,8 @@ namespace Crud_app_with_mongo.Controllers
     {
         private readonly ICrudOperationsDL _crudOperationsDL;
 
-        public crudoperationsController(ICrudOperationsDL crudOperationsDL) {
+        public crudoperationsController(ICrudOperationsDL crudOperationsDL)
+        {
             _crudOperationsDL = crudOperationsDL;
         }
 
@@ -20,12 +21,14 @@ namespace Crud_app_with_mongo.Controllers
         {
 
             InsertRecordResponse response = new InsertRecordResponse();
-            try {
-                response = await _crudOperationsDL.InsertRecord(request);     
-            }catch (Exception ex)
+            try
+            {
+                response = await _crudOperationsDL.InsertRecord(request);
+            }
+            catch (Exception ex)
             {
                 response.IsSuccess = false;
-                response.Message = "Exception Occurs"+ex.Message;
+                response.Message = "Exception Occurs" + ex.Message;
             }
             return Ok(response);
         }
@@ -47,7 +50,7 @@ namespace Crud_app_with_mongo.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetRecordByID([FromQuery]string ID)
+        public async Task<IActionResult> GetRecordByID([FromQuery] string ID)
         {
             GetRecordByIDResponse response = new GetRecordByIDResponse();
             try
@@ -145,17 +148,18 @@ namespace Crud_app_with_mongo.Controllers
         }
 
         // all apis for rfid implementations
-        
+
         // Api for Regstrestion page
         [HttpPost]
         public async Task<IActionResult> Regestration_Details(Regestration_Details_Request request)
         {
-            Regestration_Details_Response response =new Regestration_Details_Response();
+            Regestration_Details_Response response = new Regestration_Details_Response();
             try
             {
-                response = await _crudOperationsDL.RegestrationDetails(request); 
+                response = await _crudOperationsDL.RegestrationDetails(request);
             }
-            catch(Exception ex){
+            catch (Exception ex)
+            {
 
                 response.isSuccess = false;
                 response.Message = "Reg Error occured : " + ex.Message;
@@ -172,11 +176,12 @@ namespace Crud_app_with_mongo.Controllers
 
             try
             {
-                loginResponse=await _crudOperationsDL.LoginCheck(loginRequest);
+                loginResponse = await _crudOperationsDL.LoginCheck(loginRequest);
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
-                loginResponse.isSuccess=false;
+                loginResponse.isSuccess = false;
                 loginResponse.Message = "Exception Occurs : " + ex.Message;
             }
 
@@ -192,7 +197,7 @@ namespace Crud_app_with_mongo.Controllers
             {
                 response = await _crudOperationsDL.GetRecordByRfid(rfid);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response.IsSuccess = false;
                 response.Message = "Exception occurs : " + ex.Message;
@@ -200,6 +205,25 @@ namespace Crud_app_with_mongo.Controllers
             return Ok(response);
         }
 
+
+        // api to register for teacher
+        [HttpPost]
+        public async Task<IActionResult> Register_teacher(Register_Teacher_Request request)
+        {
+            Register_Teacher_Response response = new Register_Teacher_Response();
+            try
+            {
+                response = await _crudOperationsDL.Register_Teacher(request);
+            }
+            catch (Exception ex)
+            {
+
+                response.isSuccess = false;
+                response.Message = "Reg Error occured : " + ex.Message;
+
+            }
+            return Ok(response);
+        }
 
     }
 }

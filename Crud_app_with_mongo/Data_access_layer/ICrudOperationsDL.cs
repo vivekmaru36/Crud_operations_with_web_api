@@ -25,5 +25,8 @@ namespace Crud_app_with_mongo.Data_access_layer
         // api for fetching based on rfid
         public Task<GetRecordByRfidResponse> GetRecordByRfid(string rfid);
 
+        // api for reg for teacher
+        public Task<Register_Teacher_Response> Register_Teacher(Register_Teacher_Request request);
+
     }
 }
